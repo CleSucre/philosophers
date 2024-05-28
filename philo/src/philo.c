@@ -12,12 +12,26 @@
 
 #include "philo.h"
 
+static void	lock(t_philo *philo)
+{
+	if (philo->id % 2)
+	{
+		pthread_mutex_lock(&philo->shared->forks[philo->id].lock);
+		pthread_mutex_lock(&philo->shared->forks[
+			(philo->id + 1) % philo->settings->np].lock);
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->shared->forks[
+			(philo->id + 1) % philo->settings->np].lock);
+		pthread_mutex_lock(&philo->shared->forks[philo->id].lock);
+	}
+}
+
 static void	give_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->shared->lock);
-	pthread_mutex_lock(&philo->shared->forks[philo->id].lock);
-	pthread_mutex_lock(&philo->shared->forks[
-		(philo->id + 1) % philo->settings->np].lock);
+	lock(philo);
 	philo->shared->forks[philo->id].used = 0;
 	philo->shared->forks[(philo->id + 1) % philo->settings->np].used = 0;
 	pthread_mutex_unlock(&philo->shared->forks[philo->id].lock);
@@ -33,9 +47,7 @@ static void	give_forks(t_philo *philo)
 static int	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->shared->lock);
-	pthread_mutex_lock(&philo->shared->forks[philo->id].lock);
-	pthread_mutex_lock(&philo->shared->forks[
-		(philo->id + 1) % philo->settings->np].lock);
+	lock(philo);
 	if (philo->shared->forks[philo->id].used
 		|| philo->shared->forks[(philo->id + 1) % philo->settings->np].used)
 	{
