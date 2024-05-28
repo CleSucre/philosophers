@@ -12,6 +12,27 @@
 
 #include "philo.h"
 
+static int	is_dead(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->shared->lock);
+	if (philo->last_meal + philo->settings->ttd < current_time_in_ms()
+		&& !philo->shared->stop)
+	{
+		pthread_mutex_unlock(&philo->shared->lock);
+		philo->dead = 1;
+		philo->shared->stop = 1;
+		ft_print(philo, "died");
+		return (1);
+	}
+	if (philo->shared->stop)
+	{
+		pthread_mutex_unlock(&philo->shared->lock);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->shared->lock);
+	return (0);
+}
+
 static void	lock(t_philo *philo)
 {
 	if (philo->id % 2)
@@ -73,22 +94,28 @@ void	*run(void *arg)
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		if (philo->last_meal + philo->settings->ttd < current_time_in_ms())
-		{
-			philo->dead = 1;
-			ft_print(philo, "died");
+		if (is_dead(philo))
 			break ;
-		}
 		if (!take_forks(philo))
 			continue ;
+		pthread_mutex_lock(&philo->shared->lock);
 		ft_print(philo, "has taken a fork");
 		ft_print(philo, "has taken a fork");
 		ft_print(philo, "is eating");
-		usleep(philo->settings->tte);
+		pthread_mutex_unlock(&philo->shared->lock);
+		usleep(philo->settings->tte * 1000);
+		if (is_dead(philo))
+			break ;
 		give_forks(philo);
+		pthread_mutex_lock(&philo->shared->lock);
 		ft_print(philo, "is sleeping");
-		usleep(philo->settings->tts);
+		pthread_mutex_unlock(&philo->shared->lock);
+		usleep(philo->settings->tts * 1000);
+		if (is_dead(philo))
+			break ;
+		pthread_mutex_lock(&philo->shared->lock);
 		ft_print(philo, "is thinking");
+		pthread_mutex_unlock(&philo->shared->lock);
 		if (philo->full)
 			break ;
 	}

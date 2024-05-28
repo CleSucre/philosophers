@@ -12,21 +12,18 @@
 
 #include "philo.h"
 
-int	current_time_in_ms(void)
+long long	current_time_in_ms(void)
 {
 	struct timeval	tv;
-	long long		time_in_ms;
 
 	gettimeofday(&tv, NULL);
-	time_in_ms = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000;
-	return (time_in_ms);
+	return ((tv.tv_sec) * 1000 + (tv.tv_usec) / 1000);
 }
 
 int	ft_print(t_philo *philo, char *str)
 {
 	char	*tmp;
 
-	pthread_mutex_lock(&philo->shared->lock);
 	tmp = ft_itoa(current_time_in_ms() - philo->shared->start_ms);
 	ft_fputstr(1, tmp);
 	free(tmp);
@@ -37,6 +34,5 @@ int	ft_print(t_philo *philo, char *str)
 	ft_fputstr(1, " ");
 	ft_fputstr(1, str);
 	ft_fputstr(1, "\n");
-	pthread_mutex_unlock(&philo->shared->lock);
 	return (0);
 }

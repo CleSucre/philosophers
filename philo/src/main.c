@@ -29,7 +29,10 @@ static void	wait_threads(pthread_t *threads, t_philo *philo, int np)
 	while (++i < np)
 	{
 		if (philo[i].dead || fulls == np)
+		{
+			philo->shared->stop = 1;
 			break ;
+		}
 		if (philo[i].full)
 			fulls++;
 		else

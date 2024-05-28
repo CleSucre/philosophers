@@ -44,6 +44,7 @@ typedef struct s_fork
 typedef struct s_shared
 {
 	long long		start_ms;
+	int				stop;
 	t_fork			*forks;
 	pthread_mutex_t	lock;
 }						t_shared;
@@ -51,7 +52,7 @@ typedef struct s_shared
 typedef struct s_philo
 {
 	int				id;
-	int				last_meal;
+	long long		last_meal;
 	int				meals;
 	int				dead;
 	int				full;
@@ -82,7 +83,7 @@ void		*run(void *arg);
 
 // ################# PHILO_UTILS #################
 
-int			current_time_in_ms(void);
+long long	current_time_in_ms(void);
 int			ft_print(t_philo *philo, char *str);
 
 // ##################### UTILS ###################

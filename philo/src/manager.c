@@ -19,6 +19,7 @@ void	init_shared_data(t_shared *shared, t_settings *settings)
 	t_fork	*tmp_fork;
 
 	shared->start_ms = current_time_in_ms();
+	shared->stop = 0;
 	i = 0;
 	first_fork = &shared->forks[i];
 	while (i < settings->np)
