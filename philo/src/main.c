@@ -48,7 +48,7 @@ static void	wait_threads(pthread_t *threads, t_philo *philo, int np)
 	free_all(threads, philo);
 }
 
-static void	*start_pool(t_settings settings)
+static int	start_pool(t_settings settings)
 {
 	pthread_t	*threads;
 	t_shared	shared;
@@ -56,7 +56,7 @@ static void	*start_pool(t_settings settings)
 	int			i;
 
 	if (!init_memory(&threads, &shared, &philo, &settings))
-		return (NULL);
+		return (0);
 	i = 0;
 	while (i < settings.np)
 	{
@@ -70,6 +70,7 @@ static void	*start_pool(t_settings settings)
 		i++;
 	}
 	wait_threads(threads, philo, settings.np);
+	return (1);
 }
 
 int	main(int argc, char **argv)
