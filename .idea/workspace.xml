@@ -10,20 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cad9013-ed03-4fdf-bb67-522f47dc0430" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/philo/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/philo/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/philo/include/philo.h" beforeDir="false" afterPath="$PROJECT_DIR$/philo/include/philo.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/obj/src/converter.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/obj/src/main.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/obj/src/manager.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/obj/src/parsing.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/obj/src/philo.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/obj/src/philo_utils.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/obj/src/utils.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/philo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/philo/src/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/philo/src/manager.c" beforeDir="false" afterPath="$PROJECT_DIR$/philo/src/manager.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/src/philo.c" beforeDir="false" afterPath="$PROJECT_DIR$/philo/src/philo.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/src/philo_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/philo/src/philo_utils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

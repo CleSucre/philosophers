@@ -34,7 +34,6 @@ typedef struct s_settings
 
 typedef struct s_fork
 {
-	int				owner;
 	int				used;
 	void			*next;
 	void			*prev;
