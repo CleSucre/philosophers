@@ -38,16 +38,19 @@ static void	wait_threads(pthread_t *threads, t_philo *philo, int np)
 	fulls = 0;
 	while (++i < np)
 	{
+		pthread_mutex_lock(&philo->shared->lock);
 		if (philo[i].dead || fulls == np)
 		{
 			philo->shared->stop = 1;
+			pthread_mutex_unlock(&philo->shared->lock);
 			break ;
 		}
 		if (philo[i].full)
 			fulls++;
 		else
 			fulls = 0;
-		if (i == np)
+		pthread_mutex_unlock(&philo->shared->lock);
+		if (i == np - 1)
 			i = -1;
 	}
 	free_all(threads, philo, np);
