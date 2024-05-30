@@ -1,0 +1,11 @@
+# CLion
+
+.idea/
+
+# Compiled Object files
+
+philo/obj/
+
+# Executables
+
+philo/philo
