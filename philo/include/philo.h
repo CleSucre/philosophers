@@ -83,8 +83,10 @@ void		*run(void *arg);
 
 // ################# PHILO_UTILS #################
 
-long long	current_time_in_ms(void);
 int			ft_print(t_philo *philo, char *str);
+int			is_dead(t_philo *philo);
+void		give_forks(t_philo *philo);
+int			take_forks(t_philo *philo);
 
 // ##################### UTILS ###################
 
@@ -92,5 +94,6 @@ int			ft_isdigit(int c);
 int			ft_isspace(int c);
 int			ft_strlen(char *str);
 int			ft_fputstr(int fd, char *str);
+long long	current_time_in_ms(void);
 
 #endif
