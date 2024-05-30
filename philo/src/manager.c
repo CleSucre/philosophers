@@ -71,4 +71,5 @@ void	init_philo(t_philo *philo, t_shared *shared,
 	philo[id].meals = 0;
 	philo[id].dead = 0;
 	philo[id].full = 0;
+	philo[id].shared->forks[id].owner = id;
 }

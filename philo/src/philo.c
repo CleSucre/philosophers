@@ -68,6 +68,11 @@ static void	give_forks(t_philo *philo)
 static int	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->shared->lock);
+	if (philo->settings->np == 1)
+	{
+		pthread_mutex_unlock(&philo->shared->lock);
+		return (0);
+	}
 	lock(philo);
 	if (philo->shared->forks[philo->id].used
 		|| philo->shared->forks[(philo->id + 1) % philo->settings->np].used)
