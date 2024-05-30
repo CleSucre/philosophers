@@ -103,24 +103,18 @@ void	*run(void *arg)
 			break ;
 		if (!take_forks(philo))
 			continue ;
-		pthread_mutex_lock(&philo->shared->lock);
 		ft_print(philo, "has taken a fork");
 		ft_print(philo, "has taken a fork");
 		ft_print(philo, "is eating");
-		pthread_mutex_unlock(&philo->shared->lock);
 		usleep(philo->settings->tte * 1000);
 		if (is_dead(philo))
 			break ;
 		give_forks(philo);
-		pthread_mutex_lock(&philo->shared->lock);
 		ft_print(philo, "is sleeping");
-		pthread_mutex_unlock(&philo->shared->lock);
 		usleep(philo->settings->tts * 1000);
 		if (is_dead(philo))
 			break ;
-		pthread_mutex_lock(&philo->shared->lock);
 		ft_print(philo, "is thinking");
-		pthread_mutex_unlock(&philo->shared->lock);
 		if (philo->full)
 			break ;
 	}

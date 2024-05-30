@@ -12,8 +12,18 @@
 
 #include "philo.h"
 
-static void	free_all(pthread_t *threads, t_philo *philo)
+static void	free_all(pthread_t *threads, t_philo *philo, int np)
 {
+	int	i;
+
+	i = 0;
+	while (i < np)
+	{
+		pthread_join(threads[i], NULL);
+		pthread_mutex_destroy(&philo->shared->forks[i].lock);
+		i++;
+	}
+	pthread_mutex_destroy(&philo->shared->lock);
 	free(threads);
 	free(philo->shared->forks);
 	free(philo);
@@ -40,15 +50,7 @@ static void	wait_threads(pthread_t *threads, t_philo *philo, int np)
 		if (i == np)
 			i = -1;
 	}
-	i = 0;
-	while (i < np)
-	{
-		pthread_join(threads[i], NULL);
-		pthread_mutex_destroy(&philo->shared->forks[i].lock);
-		i++;
-	}
-	pthread_mutex_destroy(&philo->shared->lock);
-	free_all(threads, philo);
+	free_all(threads, philo, np);
 }
 
 static int	start_pool(t_settings settings)

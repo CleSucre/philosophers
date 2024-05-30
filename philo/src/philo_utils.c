@@ -24,6 +24,7 @@ int	ft_print(t_philo *philo, char *str)
 {
 	char	*tmp;
 
+	pthread_mutex_lock(&philo->shared->lock);
 	tmp = ft_itoa(current_time_in_ms() - philo->shared->start_ms);
 	ft_fputstr(1, tmp);
 	free(tmp);
@@ -34,5 +35,6 @@ int	ft_print(t_philo *philo, char *str)
 	ft_fputstr(1, " ");
 	ft_fputstr(1, str);
 	ft_fputstr(1, "\n");
+	pthread_mutex_unlock(&philo->shared->lock);
 	return (0);
 }
