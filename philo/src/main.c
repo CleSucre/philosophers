@@ -97,6 +97,11 @@ int	main(int argc, char **argv)
 		ft_fputstr(2, "Error: invalid argument\n");
 		return (1);
 	}
+	if (settings.np < 2)
+	{
+		write(1, "0 died\n", 7);
+		return (0);
+	}
 	start_pool(settings);
 	return (0);
 }

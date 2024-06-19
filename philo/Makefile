@@ -28,7 +28,7 @@ CC			= gcc
 
 HEAD		= include
 
-CFLAGS		= -g -I ${HEAD} -Wall -Wextra -Werror
+CFLAGS		= -I ${HEAD} -Wall -Wextra -Werror -g
 
 ${OBJ_PATH}%.o : %.c
 	mkdir -p ${@D} 2> ${DIRSEP}dev${DIRSEP}null || true
